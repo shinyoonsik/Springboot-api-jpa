@@ -10,10 +10,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/product")
 public class ProductController {
 
-    private Logger LOGGER = LoggerFactory.getLogger(ProductController.class);
+    private final Logger LOGGER = LoggerFactory.getLogger(ProductController.class);
     private final ProductService productService;
 
     @Autowired
@@ -21,8 +21,8 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @GetMapping("/product")
-    public ResponseEntity<ProductDto> getProduct(Long id) throws Exception {
+    @GetMapping("/{id}")
+    public ResponseEntity<ProductDto> getProduct(@PathVariable Long id) throws Exception {
         LOGGER.info("[HTTP Get: getProduct] id: " + id);
         ProductDto productDto = productService.getProduct(id);
 
@@ -41,7 +41,7 @@ public class ProductController {
                 .body(productDto);
     }
 
-    @PutMapping("/product")
+    @PutMapping
     public ResponseEntity<ProductDto> updateProduct(@RequestBody ProductDto requestedProductDto){
         LOGGER.info("[HTTP Put: updateProduct] productDto: " + requestedProductDto);
         ProductDto productDto = productService.updateProduct(requestedProductDto);
@@ -51,7 +51,7 @@ public class ProductController {
                 .body(productDto);
     }
 
-    @DeleteMapping("/product")
+    @DeleteMapping
     public ResponseEntity<Boolean> deleteProduct(Long id){
         LOGGER.info("[HTTP Delete] id: " + id);
         boolean result = productService.deleteProduct(id);
