@@ -1,6 +1,6 @@
 package com.springboot.jpa.controller;
 
-import com.springboot.jpa.dto.ProductDto;
+import com.springboot.jpa.dto.ProductDTO;
 import com.springboot.jpa.service.ProductService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(ProductController.class)
-class ProductControllerTest {
+class ProductEntityControllerTest {
 
     private final String URL = "/api/v1/product/";
 
@@ -30,7 +30,7 @@ class ProductControllerTest {
     void getProduct() throws Exception {
         // given
         Long id = 321L;
-        ProductDto productDto = new ProductDto(id, "책", 9090, 9);
+        ProductDTO productDto = new ProductDTO(id, "책", 9090, 9);
         given(productService.getProduct(id)).willReturn(productDto);
 
         // when

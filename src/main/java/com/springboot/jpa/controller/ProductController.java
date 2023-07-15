@@ -1,6 +1,6 @@
 package com.springboot.jpa.controller;
 
-import com.springboot.jpa.dto.ProductDto;
+import com.springboot.jpa.dto.ProductDTO;
 import com.springboot.jpa.service.ProductService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,9 +22,9 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ProductDto> getProduct(@PathVariable Long id) throws Exception {
+    public ResponseEntity<ProductDTO> getProduct(@PathVariable Long id) throws Exception {
         LOGGER.info("[HTTP Get: getProduct] id: " + id);
-        ProductDto productDto = productService.getProduct(id);
+        ProductDTO productDto = productService.getProduct(id);
 
         return ResponseEntity
                 .status(HttpStatus.OK)
@@ -32,34 +32,34 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<ProductDto> saveProduct(@RequestBody ProductDto requestedProductDto){
-        LOGGER.info("[HTTP Post: saveProduct] productDto: " + requestedProductDto);
-        ProductDto productDto = productService.saveProduct(requestedProductDto);
+    public ResponseEntity<ProductDTO> createProduct(@RequestBody ProductDTO requestedProductDTO){
+        LOGGER.info("[HTTP Post: saveProduct] productDto: " + requestedProductDTO);
+        ProductDTO productDto = productService.saveProduct(requestedProductDTO);
 
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(productDto);
     }
 
-    @PutMapping
-    public ResponseEntity<ProductDto> updateProduct(@RequestBody ProductDto requestedProductDto){
-        LOGGER.info("[HTTP Put: updateProduct] productDto: " + requestedProductDto);
-        ProductDto productDto = productService.updateProduct(requestedProductDto);
-
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(productDto);
-    }
-
-    @DeleteMapping
-    public ResponseEntity<Boolean> deleteProduct(Long id){
-        LOGGER.info("[HTTP Delete] id: " + id);
-        boolean result = productService.deleteProduct(id);
-
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(result);
-    }
+//    @PutMapping
+//    public ResponseEntity<ProductDTO> updateProduct(@RequestBody ProductDTO requestedProductDTO){
+//        LOGGER.info("[HTTP Put: updateProduct] productDto: " + requestedProductDTO);
+//        ProductDTO productDto = productService.updateProduct(requestedProductDTO);
+//
+//        return ResponseEntity
+//                .status(HttpStatus.OK)
+//                .body(productDto);
+//    }
+//
+//    @DeleteMapping
+//    public ResponseEntity<Boolean> deleteProduct(Long id){
+//        LOGGER.info("[HTTP Delete] id: " + id);
+//        boolean result = productService.deleteProduct(id);
+//
+//        return ResponseEntity
+//                .status(HttpStatus.OK)
+//                .body(result);
+//    }
 
 
 }

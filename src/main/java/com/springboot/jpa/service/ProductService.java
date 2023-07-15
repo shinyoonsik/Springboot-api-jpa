@@ -1,15 +1,15 @@
 package com.springboot.jpa.service;
 
-import com.springboot.jpa.dto.ProductDto;
+import com.springboot.jpa.dto.ProductDTO;
 
 public interface ProductService {
 
-    ProductDto getProduct(Long id) throws Exception;
+    ProductDTO getProduct(Long id) throws Exception;
 
-    ProductDto saveProduct(ProductDto productDto);
+    ProductDTO saveProduct(ProductDTO productDto);
 
-    ProductDto updateProduct(ProductDto productDto);
-
-    boolean deleteProduct(Long id);
+//    ProductDTO updateProduct(ProductDTO productDto);
+//
+//    boolean deleteProduct(Long id);
 
 }
