@@ -10,8 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -50,6 +51,13 @@ public class ProductServiceImpl implements ProductService {
         return ProductEntity.toDto(savedProductEntity);
     }
 
+    @Override
+    public List<ProductDTO> getProductList(int productPrice) {
+        List<ProductEntity> productEntityList = productRepository.findByProductPriceGreaterThan(productPrice);
+        List<ProductDTO> productDTOList = productEntityList.stream().map(productEntity -> ProductEntity.toDto(productEntity)).collect(Collectors.toList());
+
+        return productDTOList;
+    }
 //    @Override
 //    public ProductDTO updateProduct(ProductDTO productDto) {
 //        LOGGER.info("[method: updateProduct] 매개변수: {}", productDto);
