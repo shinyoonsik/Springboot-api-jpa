@@ -16,7 +16,8 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Long> { 
     List<ProductEntity> findByProductPriceGreaterThan(int productPrice);
 
 
-    static final String INSERT_PRODUCT = "INSERT INTO product (productPrice, productStock, productName) VALUES (:price, :stock, :name)";
+    static final String INSERT_PRODUCT = "INSERT INTO product (price, stock, name) VALUES (:price, :stock, :name)";
+    static final String UPDATE_PRODUCT = "UPDATE product p SET p.name = :name, p.price = :price, p.stock = :stock WHERE p.id = :id";
 
     @Modifying
     @Query(value = INSERT_PRODUCT, nativeQuery = true)
@@ -24,10 +25,9 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Long> { 
     int insertProduct(@Param("price") int price, @Param("stock") int stock, @Param("name")String name);
 
 
-//    @Modifying
-//    @Query("INSERT INTO Product (productPrice, productStock) VALUES (:productPrice, :productStock)")
-//    void insertProduct(@Param("productPrice") String name, @Param("productStock") int price);
-
-
+    @Modifying
+    @Query(value = UPDATE_PRODUCT, nativeQuery = true)
+    @Transactional
+    int updateProduct(String name, int price, int stock, @Param("id") Long id);
 
 }
